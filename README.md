@@ -15,22 +15,24 @@ Organizational notes and code for two sequencing sets:
 
 - All organizational information, and notes on lab workflow are in `GBS_rangewide/` .
 
-### Notes on library preparation
+## Notes on library preparation
 
 **NEED TO DO**: anneal more MSE adaptors, order iproof (have martinson order a tube), order ladder
 
-12/19-22/22: R/L and PCR for plates 1-6. Master mix in `FRAXONE_RFseq_mastermixcockatils.xlsx`.
+### 12/19-12/22: R/L and PCR for plates 1-6. Master mix in `FRAXONE_RFseq_mastermixcockatils.xlsx`.
 
-12/23/22: gel
+12/23/22: gel for FRLA_LIB1
  
 ![GELIMAGE](md_images/FRLA_LIB1_GEL.jpg)
 
 10 ul of each PCR product into final library. Tubes in door of freezer labelled **FRLA_LIB1**.
 
-12/18/22:
+12/28 - 12/31: R/L and PCR for plates 7-12. Master mix in `FRAXTWO_RFseq_mastermixcockatils.xlsx`. Note, plate 12 is 50% full.
 
-12/19/22:
+12/23/22: gel for FRLA_LIB1
+ 
+![GELIMAGE](md_images/FRLA_LIB1_GEL.jpg)
 
-12/27/22: R/L for plates 7-12. Master mix in `FRAXTWO_RFseq_mastermixcockatils.xlsx`
+10 ul of each PCR product into final library. Tubes in door of freezer labelled **FRLA_LIB2**.
 
 ## Data analysis: contaminant cleaning, barcode parsing, data storage.
