@@ -31,10 +31,13 @@ Organizational notes and code for two sequencing sets:
 
 12/28 - 12/31: R/L and PCR for plates 7-12. Master mix in `FRAXTWO_RFseq_mastermixcockatils.xlsx`. Note, plate 12 is 85% full, and contains 4 columns of *P. rigida* DNAs from Connie Bolte.
 
-12/31/22: gel for FRLA_LIB3
+12/31/22: gel for FRLA_LIB2
  
-![GELIMAGE](md_images/FRLA_LIB1_GEL.jpg)
+![GELIMAGE](md_images/FRLA2_gel.jpg)
 
 10 ul of each PCR product into final library. Tubes in door of freezer labelled **FRLA_LIB2**.
+
+# DONE TO HERE ###################
+
 
 ## Data analysis: contaminant cleaning, barcode parsing, data storage.
