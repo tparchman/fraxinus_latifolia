@@ -29,7 +29,7 @@ Organizational notes and code for two sequencing sets:
 
 10 ul of each PCR product into final library. Tubes in door of freezer labelled **FRLA_LIB1**.
 
-12/28 - 12/31: R/L and PCR for plates 7-12. Master mix in `FRAXTWO_RFseq_mastermixcockatils.xlsx`. Note, plate 12 is 85% full, and contains 4 columns of *P. rigida* DNAs from Connie Bolte.
+### 12/28 - 12/31: R/L and PCR for plates 7-12. Master mix in `FRAXTWO_RFseq_mastermixcockatils.xlsx`. Note, plate 12 is 85% full, and contains 4 columns of *P. rigida* DNAs from Connie Bolte.
 
 12/31/22: gel for FRLA_LIB2
  
@@ -37,7 +37,126 @@ Organizational notes and code for two sequencing sets:
 
 10 ul of each PCR product into final library. Tubes in door of freezer labelled **FRLA_LIB2**.
 
-# DONE TO HERE ###################
 
 
-## Data analysis: contaminant cleaning, barcode parsing, data storage.
+## Data analysis: contaminant cleaning, barcode parsing, data storage, directory organization, and initial analyses.
+
+We generated two lanes of S2 chemistry NovaSeq data at UTGSAF in March of 2023. FRLA1 has plates 1-6, FRLA2 has plates 7-12, plate 12 has some Pinus rigida for Connie Bolte.
+
+
+
+## This file contains code and notes for
+1) cleaning contaminants using tapioca
+2) parsing barcodes
+3) splitting fastqs 
+4) de novo assembly
+5) reference based assembly
+6) calling variants
+7) filtering
+8) entropy for genotype probabilities.
+
+## 1. Cleaning contaminants
+
+Being executed on ponderosa using tapioca pipeline. Commands in two bash scripts (cleaning_bash_CADE.sh and cleaning_bash_SEGI.sh), executed as below (2/16/23). This was for two S2 NovaSeq lanes generated in late December 2022.
+
+Decompress fastq file:
+
+    $ gunzip *fastq
+    $ gunzip FRLA1_S1_L001_R1_001.fastq.gz
+
+Number of reads **before** cleaning:
+
+    $ nohup grep -c "^@" FRLA1_S1_L001_R1_001.fastq > FRLA1_number_of_rawreads.txt &
+    ## raw reads: 2,279,817,982
+
+    $ nohup grep -c "^@" FRLA2_S2_L002_R1_001.fastq > FRLA2_number_of_rawreads.txt &
+    ## 
+
+
+To run cleaning_bash* tapioca wrapper, exit conda environment, load modules, and run bash scripts.
+
+    $ module load fqutils/0.4.1
+    $ module load bowtie2/2.2.5
+    
+    $ bash cleaning_bash_FRLA1.sh &
+    $ bash cleaning_bash_FRLA2.sh &
+
+
+After .clean.fastq has been produced, rm raw data:
+
+    $ rm -rf FRLA1_S1_L001_R1_001.fastq &
+    $ rm -rf FRLA2_S2_L002_R1_001.fastq &
+
+Raw data will stay stored in: /archive/parchman_lab/rawdata_to_backup/FRLA/
+
+Number of reads **after** cleaning:
+
+
+    $ nohup grep -c "^@" FRLA1.clean.fastq > FRLA1_clean_reads.txt &
+    # FRLA1 : 1528882238
+
+    $ nohup grep -c "^@" FRLA2.clean.fastq > FRLA2_clean_reads.txt.txt &
+    # FRLA2: 
+
+####################################################################################
+## 2. Barcode parsing:
+####################################################################################
+
+Barcode keyfile are `/working/parchman/FRLA/XXX_barcode_key.csv` and `/working/parchman/FRLA/XXX_barcode_key.csv`
+
+Parsing FRLA1 library:
+
+    $ nohup perl parse_barcodes768.pl FRLA1_barcode_key.csv FRLA1.clean.fastq A00 &>/dev/null &
+
+
+Parsing FRLA2 library:
+
+    $ nohup perl parse_barcodes768.pl FRLA2_barcodekey.csv FRLA2.clean.fastq A00 &>/dev/null &
+
+
+
+`NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
+
+    $ less parsereport_FRLA1.clean.fastq
+    Good mids count: 1470709510
+    Bad mids count: 58172533
+
+    $ less parsereport_FRLA2.clean.fastq
+    
+
+
+
+####################################################################################
+## 3. splitting fastqs
+####################################################################################
+
+For FRLA, doing this in `/working/parchman/FRLA/splitfastqs_FRLA*`
+
+Make ids file
+
+    $ cut -f 3 -d "," FRLA1_barcode_key.csv | grep "_" > FRLA1_ids_noheader.txt
+
+    $ cut -f 3 -d "," FRLA2_barcode_key.csv | grep "_" > FRLA2_ids_noheader.txt
+
+
+Split fastqs by individual
+
+    $ nohup perl splitFastq_universal_regex.pl FRLA1_ids_noheader.txt parsed_FRLA1.clean.fastq &>/dev/null &
+
+    $ nohup perl splitFastq_universal_regex.pl FRLA2_ids_noheader.txt parsed_FRLA2.clean.fastq &>/dev/null &
+
+# DONE TO HERE &&&&&&&&&&
+
+
+Zip the parsed*fastq files for now, but delete once patterns and qc are verified.
+
+### Moving fastqs to project specific directories
+
+Fastqs by species are located on ponderosa in:
+
+FRLA1:
+`/working/parchman/FRLA`
+
+FRLA2:
+`/working/parchman/FRLA`
+
