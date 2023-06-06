@@ -107,7 +107,7 @@ Number of reads **after** cleaning:
 ## 2. Barcode parsing:
 ####################################################################################
 
-Barcode keyfile are `/working/parchman/FRLA/XXX_barcode_key.csv` and `/working/parchman/FRLA/XXX_barcode_key.csv`
+Barcode keyfile are `/working/parchman/FRLA/FRLA1_barcode_key.csv` and `/working/parchman/FRLA/FRLA2_barcode_key.csv`
 
 Parsing FRLA1 library:
 
