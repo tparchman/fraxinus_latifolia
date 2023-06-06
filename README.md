@@ -107,7 +107,7 @@ Number of reads **after** cleaning:
 ## 2. Barcode parsing:
 ####################################################################################
 
-Barcode keyfile are `/working/parchman/FRLA/FRLA1_barcode_key.csv` and `/working/parchman/FRLA/FRLA2_barcode_key.csv`
+Be sure to deactivate conda environment before running the below steps. Barcode keyfiles are `/working/parchman/FRLA/FRLA1_barcode_key.csv` and `/working/parchman/FRLA/FRLA2_barcode_key.csv`
 
 Parsing FRLA1 library:
 
@@ -116,7 +116,7 @@ Parsing FRLA1 library:
 
 Parsing FRLA2 library:
 
-    $ nohup perl parse_barcodes768.pl FRLA2_barcodekey.csv FRLA2.clean.fastq A00 &>/dev/null &
+    $ nohup perl parse_barcodes768.pl FRLA2_barcode_key.csv FRLA2.clean.fastq A00 &>/dev/null &
 
 
 
