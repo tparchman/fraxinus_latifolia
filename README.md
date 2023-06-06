@@ -61,9 +61,11 @@ Being executed on ponderosa using tapioca pipeline. Commands in two bash scripts
 
 Decompress fastq file:
 
-    $ gunzip *fastq
     $ gunzip FRLA1_S1_L001_R1_001.fastq.gz
 
+    $ gunzip FRLA2_S2_L002_R1_001.fastq.gz
+
+# DONE TO HERE ********
 Number of reads **before** cleaning:
 
     $ nohup grep -c "^@" FRLA1_S1_L001_R1_001.fastq > FRLA1_number_of_rawreads.txt &
@@ -71,6 +73,7 @@ Number of reads **before** cleaning:
 
     $ nohup grep -c "^@" FRLA2_S2_L002_R1_001.fastq > FRLA2_number_of_rawreads.txt &
     ## 
+# DONE TO HERE ********
 
 
 To run cleaning_bash* tapioca wrapper, exit conda environment, load modules, and run bash scripts.
@@ -86,6 +89,8 @@ After .clean.fastq has been produced, rm raw data:
 
     $ rm -rf FRLA1_S1_L001_R1_001.fastq &
     $ rm -rf FRLA2_S2_L002_R1_001.fastq &
+
+# DONE TO HERE ********
 
 Raw data will stay stored in: /archive/parchman_lab/rawdata_to_backup/FRLA/
 
