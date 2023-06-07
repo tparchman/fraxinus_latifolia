@@ -72,7 +72,7 @@ Number of reads **before** cleaning:
     ## raw reads: 2,279,817,982
 
     $ nohup grep -c "^@" FRLA2_S2_L002_R1_001.fastq > FRLA2_number_of_rawreads.txt &
-    ## 
+    ## 2,288,711,625
 # DONE TO HERE ********
 
 
@@ -101,7 +101,7 @@ Number of reads **after** cleaning:
     # FRLA1 : 1528882238
 
     $ nohup grep -c "^@" FRLA2.clean.fastq > FRLA2_clean_reads.txt.txt &
-    # FRLA2: 
+    # FRLA2: 1566562636
 
 ####################################################################################
 ## 2. Barcode parsing:
@@ -119,7 +119,7 @@ Parsing FRLA2 library:
     $ nohup perl parse_barcodes768.pl FRLA2_barcode_key.csv FRLA2.clean.fastq A00 &>/dev/null &
 
 
-
+# DONE TO HERE
 `NOTE`: the A00 object is the code that identifies the sequencer (first three characters after the @ in the fastq identifier).
 
     $ less parsereport_FRLA1.clean.fastq
