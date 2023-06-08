@@ -125,9 +125,14 @@ Parsing FRLA2 library:
     $ less parsereport_FRLA1.clean.fastq
     Good mids count: 1470709510
     Bad mids count: 58172533
+    Number of seqs with potential MSE adapter in seq: 252359    
+    Seqs that were too short after removing MSE and beyond: 195
 
     $ less parsereport_FRLA2.clean.fastq
-    
+    Good mids count: 1507996498
+    Bad mids count: 58565931
+    Number of seqs with potential MSE adapter in seq: 271709
+    Seqs that were too short after removing MSE and beyond: 207
 
 
 
